@@ -1,0 +1,38 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+    {% for recipe in recipes.data %}
+    <div class="panel panel-default">
+      <div class="panel-heading">{{ recipe.name }}</div>
+        <div class="panel-body">
+          {{ recipe.description }}
+        </div>
+      <div class="panel-footer"><span class="label label-info">{{ recipe.category.name }}</span></div>
+    </div>
+    {% endfor %}
+
+<center>
+  <ul class="pagination pagination-sm">
+    {% if(recipes.currentPage>1) %}
+      <li><a href="?page={{ recipes.currentPage - 1 }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><a href="#">&laquo;</a></li>
+    {% endif %}
+
+    {% for i in range(1, recipes.lastPage + 1) %}
+      {% if (i==recipes.currentPage) %}
+      <li class="active"><a href="?page={{ i }}">{{ i }}</a></li>
+      {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor  %}
+
+    {% if(recipes.currentPage==recipes.lastPage) %}
+      <li class="disabled"><a href="#">&raquo;</a></li>
+    {% else %}
+      <li><a href="?page={{ recipes.currentPage + 1 }}">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</center>
+
+{% endblock %}

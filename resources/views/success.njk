@@ -1,0 +1,14 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+<div class="row">
+    <div class="alert alert-dismissible alert-success">
+        <strong>Siker:</strong> {{ message }}
+            {% if(favAdded) %}
+                <a href="/myfavorites" class="btn btn-link" style="color: #ffffff">Kedvenceim megtekintése</a>
+            {% elif(favDeleted) %}
+                <a href="/recipe/{{ recipe.id }}" class="btn btn-link" style="color: #ffffff">Vissza a recepthez</a>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

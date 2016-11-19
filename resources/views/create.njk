@@ -1,0 +1,60 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+<div class="row">
+    {% for error in old('errors') %}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Hiba!</strong> {{ error.message }}
+    </div>
+    {% endfor %}
+    <form class="form-horizontal" method="POST">
+        {{ csrfField }}
+        <fieldset>
+            <legend>Uj recept</legend>
+            <div class="form-group">
+            <label for="name" class="col-lg-2 control-label">Recept neve</label>
+            <div class="col-lg-10">
+                <input name="name" value="{{ old('name') }}" type="text" class="form-control">
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Recept leírása</label>
+            <div class="col-lg-10">
+                <textarea name="description" class="form-control" style="width: 30%" rows="7">{{ old('description') }}</textarea>
+                <span class="help-block">Ebbe a dobozba írja be a recept hozzávalóit és elkészítésének leírását.</span>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="englishName" class="col-lg-2 control-label">Recept angol neve</label>
+            <div class="col-lg-10">
+                <input name="englishName" value="{{ old('englishName') }}" type="text" class="form-control" placeholder="Hagyja üresen, ha nem kívánja lefordítani angolra a receptet.">
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Recept angol leírása</label>
+            <div class="col-lg-10">
+                <textarea name="englishDescription" class="form-control" style="width: 30%" rows="7" placeholder="Hagyja üresen, ha nem kívánja lefordítani angolra a receptet.">{{ old('englishDescription') }}</textarea>
+                <span class="help-block">Ebbe a dobozba írja be a recept hozzávalóit és elkészítésének angol leírását.</span>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Kategória</label>
+            <div class="col-lg-10" style="width: 20%;">
+                <select name="category_id" class="form-control">
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <a href="/all"><span class="btn btn-default">Mégsem</span></a>
+                <button type="submit" class="btn btn-primary">Recept beküldése</button>
+            </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

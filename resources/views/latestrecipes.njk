@@ -1,0 +1,17 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+<div class="panel panel-primary">
+    <div class="panel-heading">10 legújabb recept</div>
+    <div class="list-group">
+        {% if(latest.length==0) %}
+            <a href="/recipe/{{ l[0] }}" class="list-group-item"><center>Még nem szerepel recept az adatbázisban.</center></span></a>
+        {% endif %}
+        {% for l in latest %}
+            {% if(l!=null) %}
+                <a href="/recipe/{{ l[0] }}" class="list-group-item">{{ l[1][0] }}<span class="label label-info pull-right">{{ l[1][2] }}</span></a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

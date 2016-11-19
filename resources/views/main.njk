@@ -1,0 +1,32 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+<div class="row">
+    {% if(categories.length==0) %}
+        <center><p class="lead">Még nem szerepel recept az adatbázisban.</p></center>
+    {% endif %}
+    {% for category in categories %}
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ category.name }}
+                <span class="label label-info pull-right" >{{ category.recipes.length }} db</span>
+            </div>
+            <ul class="list-group">
+                {% if(category.recipes.length==0) %}
+                    <li class="list-group-item">
+                        <center>Ebben a kategóriában még nem szerepel recept.</center>
+                    </li>
+                {% else %}
+                    {% for recipe in category.recipes %}
+                    <li class="list-group-item">
+                        <a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
+                    </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

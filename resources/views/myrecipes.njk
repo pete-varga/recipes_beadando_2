@@ -1,0 +1,16 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+<div class="panel panel-primary">
+    <div class="panel-heading">Saját receptjeim</div>
+    <div class="list-group">
+        {% if(recipes.length)==0 %}
+            <center><a class="list-group-item">Még nem küldtél be receptet.</a></center>
+        {% else %}
+            {% for recipe in recipes %}
+              <a href="/recipe/{{ recipe.id }}" class="list-group-item">{{ recipe.name }}<span class="label label-info pull-right">{{ recipe.category.name }}</span></a>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

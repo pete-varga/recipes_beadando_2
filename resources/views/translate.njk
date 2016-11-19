@@ -1,0 +1,49 @@
+{% extends "parent.njk" %}
+
+{% block content %}
+<div class="row">
+    {% for error in old('errors') %}
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Hiba!</strong> {{ error.message }}
+    </div>
+    {% endfor %}
+    <form class="form-horizontal" method="POST">
+        {{ csrfField }}
+        <fieldset>
+            <legend>Recept fordítása</legend>
+            <div class="form-group">
+            <label for="name" class="col-lg-2 control-label">Recept neve</label>
+            <div class="col-lg-10">
+                <input name="name" value="{{ recipe.name }}" type="text" class="form-control" readonly>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="description" class="col-lg-2 control-label">Recept leírása</label>
+            <div class="col-lg-10">
+                <textarea name="description" class="form-control" style="width: 30%" rows="7" readonly>{{ recipe.description }}</textarea>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="englishName" class="col-lg-2 control-label">Recept angol neve</label>
+            <div class="col-lg-10">
+                <input name="englishName" ype="text" class="form-control" placeholder="Recept angol neve">
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="englishDescription" class="col-lg-2 control-label">Recept angol leírása</label>
+            <div class="col-lg-10">
+                <textarea name="englishDescription" class="form-control" style="width: 30%" rows="7">{{ recipe.englishDescription }}</textarea>
+                <span class="help-block">Ebbe a dobozba írja be a recept hozzávalóit és elkészítésének angol leírását.</span>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <a href="/recipe/{{ recipe.id }}"><span class="btn btn-default">Mégsem</span></a>
+                <button type="submit" class="btn btn-primary">Recept fordítása</button>
+            </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
