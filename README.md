@@ -72,147 +72,147 @@ Link: [http://bit.ly/2guy6hb](http://bit.ly/2guy6hb)
 ![Receptek szerkesztesenek folyamata](images/folyamatok/8.PNG)
 Link: [http://bit.ly/2frtWl2](http://bit.ly/2frtWl2)
 
-## Architektura terv
+## Architektúra terv
 
-#### Oldalterkep
+#### Oldaltérkép
 
 Publikus:
 
-* Fooldal
-* Receptek bongeszese
-	* Recept megtekintese
-		* Recept forditasa (lathato opcio, de bejelentkezesre keszteti a felhasznalot)
-* Kereses
-* Belepes
-* Regisztracio
+* Főoldal
+* Receptek böngészése
+	* Recept megtekintése
+		* Recept fordítása (látható opció, de bejelentkezésre készteti a felhasználót)
+* Keresés
+* Belépés
+* Regiszttráció
 
 Felhasználó
 
-* Sajat receptek megtekintese
-* Receptek bongeszese
-	* Recept megtekintese
-		* Recept szerkesztese (ha a felhasznaloe a recept)
-		* Recept torlese (ha a felhasznaloe a recept)
-* Kedvenc receptek megtekintese
-* Fiokadatok megtekintese
-	* Fiokadatok szerkesztese
-* Kijelentkezes
+* Saját receptek megtekintése
+* Receptek böngészése
+	* Recept megtekintése
+		* Recept szerkesztése
+		* Recept törlése (ha a felhasználóé a recept)
+* Kedvenc receptek megtekintése
+* Fiókadatok megtekintése
+	* Fiókadatok szerkesztése
+* Kijelentkezés
 
-#### Vegpontok
+#### Végpontok
 
-```GET /``` : fooldal
+```GET /``` : főoldal
 
-```GET /all``` : receptek bongeszesenek oldala
+```GET /all``` : receptek böngészésének oldala
 
-```GET /login``` : bejelentkezo oldal
+```GET /login``` : bejelentkező oldal
 
-```POST /login``` : bejelentkezo oldal adatainak elkuldese
+```POST /login``` : bejelentkező oldal adatainak elküldése
 
-```GET /create``` : recept letrehozasanak oldala
+```GET /create``` : recept létrehozásának oldala
 
-```POST /create``` : recept letrehozasanak adatainak elkuldese
+```POST /create``` : recept létrehozásának adatainak elküldése
 
 ```GET /recipe/:id``` : egy recept oldala
 
-```GET /recipe/:id/edit``` : egy recept szerkesztojenek oldala
+```GET /recipe/:id/edit``` : egy recept szerkesztőjének oldala
 
-```POST /recipe/:id/edit``` : egy recept szerkesztojenek az adatainak elkuldese 
+```POST /recipe/:id/edit``` : egy recept szerkesztőjének az adatainak elküldése 
 
-```POST /recipe/:id/delete``` : egy torlendo recept adatainak elkuldese (recept torlese)
+```POST /recipe/:id/delete``` : egy törlendő recept adatainak elküldése (recept törlése)
 
-```GET /recipe/:id/translate``` : egy recept forditojanak oldala
+```GET /recipe/:id/translate``` : egy recept fordítójának oldala
 
-```POST /recipe/:id/translate``` : egy recept forditojanak az adatainak elkuldese
+```POST /recipe/:id/translate``` : egy recept fordítójának az adatainak elküldése
 
-```GET /register``` : regisztracios oldal
+```GET /register``` : regisztrációs oldal
 
-```POST /register``` : regisztracio adatainak elkuldese
+```POST /register``` : regisztráció adatainak elküldése
 
-```GET /logout``` : felhasznalo kijelentkeztetese
+```GET /logout``` : felhasználó kijelentkeztetése
 
-```POST /search``` : keresendo kifejezes elkuldese
+```POST /search``` : keresendő kifejezés elküldése
 
-```GET /search``` : keresesi talalatok oldala
+```GET /search``` : keresési találatok oldala
 
-```GET /account``` : fiokadatok oldala
+```GET /account``` : fiókadatok oldala
 
-```GET /editaccount``` : fiokadatok szerkesztojenek oldala
+```GET /editaccount``` : fiókadatok szerkesztőjének oldala
 
-```POST /editaccount``` : fiokatadok szerkesztojenek az adatainak elkuldese
+```POST /editaccount``` : fiókadatok szerkesztőjének az adatainak elküldése
 
-```GET /myrecipes``` : sajat receptek oldala
+```GET /myrecipes``` : saját receptek oldala
 
 ```GET /myfavorites``` : kedvenc receptek oldala
 
-```POST /recipe/:id/favorite``` : recept kedvencekbe tevese
+```POST /recipe/:id/favorite``` : recept kedvencekbe tevése
 
-```POST /recipe/:id/removeFavorite``` : recept kedvencekbol valo torlese
+```POST /recipe/:id/removeFavorite``` : recept kedvencekből való törlése
 
 ```GET /error``` : hibaoldal
 
-## Felhasznaloifelulet-modell
+## Felhasználóifelület-modell
 
-#### Oldalvazlatok
+#### Oldalvázlatok
 
-![Oldalvazlat](images/oldalvazlatok/1.PNG)
+![Oldalvázlat](images/oldalvazlatok/1.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/2.PNG)
+![Oldalvázlat](images/oldalvazlatok/2.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/3.PNG)
+![Oldalvázlat](images/oldalvazlatok/3.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/4.PNG)
+![Oldalvázlat](images/oldalvazlatok/4.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/5.PNG)
+![Oldalvázlat](images/oldalvazlatok/5.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/6.PNG)
+![Oldalvázlat](images/oldalvazlatok/6.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/7.PNG)
+![Oldalvázlat](images/oldalvazlatok/7.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/8.PNG)
+![Oldalvázlat](images/oldalvazlatok/8.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/9.PNG)
+![Oldalvázlat](images/oldalvazlatok/9.PNG)
 
-![Oldalvazlat](images/oldalvazlatok/10.PNG)
+![Oldalvázlat](images/oldalvazlatok/10.PNG)
 
-## Osztalymodell
+## Osztálymodell
 
 #### Adatmodell
 
 ![Adatamodell](images/adatmodell.PNG)
 
-#### Adatbazisterv
+#### Adatbázisterv
 
-![Adatbazisterv](images/tablaleirasok.PNG)
+![Adatbázisterv](images/tablaleirasok.PNG)
 
-## Implementacio
+## Implementáció
 
-#### Fejlesztokornyezet
+#### Fejlesztőkörnyezet
 
-* Lokalis
+* Lokális
 * Visual Studio Code
 	* parancssor
-* Bongeszo
+* Böngésző
 
 #### Keretrendszer
 
 * AdonisJS
 
-## Felhasznaloi dokumentacio
+## Felhasználói dokumentáció
 
 #### A futtatáshoz ajánlott hardver-, szoftver konfiguráció
 
-Windows operacios rendszer, Visual Studio Code, NodeJS, AdonisJS, npmJS
+Windows operációs rendszer, Visual Studio Code, NodeJS, AdonisJS, npmJS
 
 #### Telepítés lépései: hogyan kerül a Githubról a célgépre a program, hogyan kell elindítani
 
 #### A program használata
 
-A weboldal megnyitasakor (ezesetben localhost:3333) a fooldal jelenik meg, ahol megtekinthetjuk a 10 legujabb receptet. Ezek kozul barmelyikre kattintva az adott recept oldalara jutunk, ahol lathatjuk a recept nevet es leirasat (angolul es magyarul). Ha a receptnek nincsen angol leirasa, akkor lehetosegunk van leforditani a receptet a "Leforditom!" gombra kattintva a recept alatt. Ezt a gombot vendegek es bejelentkezett felhasznalok is latjak, viszont csak bejelentkezett felhasznalok tudjak kihasznalni. Amikor rakattintunk a "Leforditom!" gombra, ket lehetseges kimenet van: a) a felhasznalo vendeg: ekkor egy hibauzenet jelenik meg, ami kozli a vendeggel, hogy csak bejelentkezett felhasznalo fordithat le egy receptet. b) a felhasznalo fiokkal rendelkezik es be van jelentkezve: ekkor a gombra kattintas utan a forditofelulet jelenik meg, ahol (segitsegkeppen) lathato a recept magyar neve es magyar leirasa, ezek a mezok viszont nem szerkeszthetoek. Alatta talalhato a ket szekesztheto mezo, a recept angol neve es angol leirasa. Miutan kitoltottuk a mezoket a megfelelo adatokkal, a "Recept forditasa" gombra kattintva elmentodik a recept, immar az angol nevvel es leirassal, es atiranyitodunk a recept oldalara, ahol lathatjuk, hogyan nez ki az angol verzioja a receptnek. 
+A weboldal megnyitásakor (ezesetben localhost:3333) a főoldal jelenik meg, ahol megtekinthetjük a 10 legújabb receptet. Ezek közül bármelyikre kattintva az adott recept oldalára jutunk, ahol láthatjuk a recept nevét és leírását (angolul és magyarul). Ha a receptnek nincsen angol leírása, akkor lehetőségünk van lefordítani a receptet a "Lefordítom!" gombra kattintva a recept alatt. Ezt a gombot vendégek és bejelentkezett felhasználók is látják, viszont csak bejelentkezett felhasználók tudják kihasználni. Amikor rákattintunk a "Lefordítom!" gombra, két lehetségés kimenet van: a) a felhasználó vendég: ekkor egy hibaüzenet jelenik meg, ami közli a vendéggel, hogy csak bejelentkezett felhasználó fordíthat le egy receptet. b) a felhasználó fiókkal rendelkezik és be van jelentkezve: ekkor a gombra kattintás után a fordítófelület jelenik meg, ahol (segítségképpen) látható a recept magyar neve és magyar leírása, ezek a mezők viszont nem szerkeszthetőek. Alatta található a két szerkeszthető mező, a recept angol neve és angol leírása. Miután kitöltöttük a mezőket a megfelelő adatokkal, a "Recept fordítása" gombra kattintva elmentődik a recept, immár az angol névvel és leírással, és átirányítódunk a recept oldalára, ahol láthatjuk, hogyan néz ki a recept angol verziója. 
 
-Az "Uj recept felvetele" menupontra kattintva ket opcio lehetseges: a) a felhasznalo vendeg: ekkor a felhasznalot egy hibauzenet fogadja, ami kozli a vendeggel, hogy csak bejelentkezett felhasznalok hozhatnak letre uj receptet. b) a felhasznalonak van fiokja es be van jelentkezve: ekkor megjelenik a recept felvetelere hasznalt oldal, ahol megadhatjuk a recept (angol es/vagy magyar) nevet es leirasat, illetve hogy milyen kategoriaba szeretnenk tenni a receptet. Ezek kozul a recept magyar nevenek es leirasanak, illetve a kategoria megadasa kotelezo. Ellenkezo esetben hibauzenetet kapunk, ami megmondja, hogy mi volt a problema a recept felvetelevel kapcsolatban. Miutan felvettunk egy uj receptet, a recept oldalara iranyitodunk at, igy lathatjuk hogyan nez ki az ujonnan bekuldott recept oldala. 
+Az "Új recept felvétele" menüpontra kattintva két opció lehetséges: a) a felhasználó vendég: ekkor a felhasználót egy hibaüzenet fogadja, ami közli a vendéggel, hogy csak bejelentkezett felhasználók hozhatnak létre új receptet. b) a felhasználónak van fiókja és be van jelentkezve: ekkor megjelenik a recept felvételére használt oldal, ahol megadhatjuk a recept (angol és/vagy magyar) nevét és leírását, illetve hogy milyen kategóriát szeretnénk választani a receptnek. Ezek közül a recept magyar nevének és leírásának, illetve a kategória megadása kötelező. Ellenkező esetben hibaüzenetet kapunk, ami megmondja, hogy mi volt a probléma a recept felvételével kapcsolatban. Miután felvettünk egy új receptet, a recept oldalára irányítódunk át, így láthatjuk hogyan néz ki az újonnan beküldött recept oldala. 
 
-A "Receptek bongeszese" menupontra kattintva lathatjuk az osszes receptet kategoriakra bontva. Barmely receptre kattintva megtekinthetjuk magat a receptet. A recept oldalanak aljan, ha egy felhasznalo be van jelentkezve, akkor tobb gombot is lathat. Az elso gomb a "Kedvencekhez adom", aminek segitsegevel a kedvenceinkhez adhatjuk a receptet. Ha mar a kedvenceink kozt van a recept, akkor ez a gomb "Torlom a kedvencekbol" felirattal jelenik meg, aminek hasznalatat lentebb reszletesen kifejtve talalhatja meg. A masodik gomb a "Recept szerkesztese" gomb, amire kattintva a receptszerkeszto oldalra jutunk. Itt ugyanazok ervenyesek, mint uj recept felvetelekor. A harmadik gomb, amit lathatunk egy recept oldalan, a "Recept torlese" gomb, ami kizarolag csak azoknak a felhasznaloknak jelenik meg, akie a recept, amit eppen nezunk.
+A "Receptek böngészése" menüpontra kattintva láthatjuk az összes receptet kategóriákra bontva. Bármely receptre kattintva megtekinthetjük magát a receptet. A recept oldalának alján, ha egy felhasználó be van jelentkezve, akkor több gombot is láthat. Az első gomb a "Kedvencekhez adom", aminek segítségével a kedvenceinkhez adhatjuk a receptet. Ha már a kedvenceink közt van a recept, akkor ez a gomb "Törlöm a kedvencekből" felirattal jelenik meg, aminek használatát lejjebb részletésen kifejtve találhatja meg. A második gomb a "Recept szerkésztése" gomb, amire kattintva a receptszerkesztő oldalra jutunk. Itt ugyanazok érvényesek, mint új recept felvételekor. A harmadik gomb, amit láthatunk egy recept oldalán, a "Recept törlése" gomb, ami kizárólag csak azoknak a felhasználóknak jelenik meg, akié a recept, amit éppen nézünk.
 
-A kereses mezo kitoltesekor a "Kereses" gombra kattintva a keresesi talalatok oldalara jutunk. Ha a keresesi mezo nem volt kitoltve, de a gombot megnyomjuk, akkor az osszes receptet latjuk. A kereses soran oldalankent X db receptet tekinthetunk meg, a lap aljan pedig a balra/jobbra-nyilakkal, illetve a szamokkal navigalhatunk a talalatok kozott.
+A kerésés mező kitöltésekor a "Kerésés" gombra kattintva a kerésési találatok oldalára jutunk. Ha a kerésési mező nem volt kitöltve, de a gombot megnyomjuk, akkor az összes receptet látjuk. A kerésés során oldalanként [TODO] X db receptet tekinthetünk meg, a lap alján pedig a balra/jobbra-nyilakkal, illetve a számokkal navigálhatunk a találatok között.
 
-A "Regisztracio" menupontra kattintva ertelemszeruen eljutunk a regisztracios oldalra, ahol a mezok kitoltese utan a "Regisztralok!" gombra kattintva maris bekerul a vendeg a rendszerbe, mint felhasznalo fiokkal. A vezeteknev illetve keresztnev mezok kivetelevel minden mezo kitoltese kotelezo. A jelszonak minimum 5 karakternek kell lennie. Miutan regisztraltunk, a "Bejelentkezes" gombra kattintva ertelemszeruen bejelentkezhetunk. A gombra kattintva a bejelentkezo oldalra jutunk, ahol az e-mail cim es a hozzatartozo jelszo megadasaval tudunk bejelentkezni. Ha valami hiba lep fel a bejelentkezes soran, akkor arrol hibauzenetet kapunk. Miutan bejelentkezunk, ujra a fooldalra kerulunk, ahol a jobb felso sarokban a nevunkre kattintva egy legordulo menu menupontjai kozul valaszthatunk. Az elso menupont a "Sajat receptjeim", ahol megtekinthetjuk az altalunk bekuldott recepteket egy listaban, a receptek nevei mellett a recept kategoriajanak nevevel. Ha ki szeretnenk torolni egy sajat receptet, akkor egyszeruen csak kattintsunk a receptre, majd a recept oldalan a "Recept torlese" gombra. Ez a gomb kizarolag annak a felhasznalonak jelenik meg, akie az a recept. A legordulo menuben a masodik menupont a "Kedvenceim", ahol megtekinthetjuk a kedvenc receptjeink listajat. Ha torolni szeretnenk egy receptet a kedvenceink kozul, akkor egyszeruen a receptre valo kattintas utan, a recept oldalan kattintsunk a "Torlom a kedvencekbol" gombra. A harmadik menupont a "Fiok megtekintese", amire kattintva megtekinthetjuk a fiokunk adatait (felhasznalonev, vezeteknev, keresztnev, illetve e-mail). Ezek a mezok ezen az oldalon nem szerkeszthetoek. Ha szerkeszteni szeretnenk az adatainkat, akkor azt az "Adataim szerkesztese" gombra kattintva tehetjuk meg. Itt minden mezo szerkesztheto, beleertve a jelszot is. Miutan szerkesztettuk a kivant mezoket, kattintsunk a "Valtoztatasok mentese" gombra es frissult is minden valtoztatott adat. Ha esetleg olyan felhasznalonevet vagy e-mailt valasztunk, amit mar mas valasztott, akkor hibauzenetet kapunk, mert ezek az adatok minden felhasznalora nezve egyediek. Az utolso menupont a "Kijelentkezes", ahol ertelemszeruen kijelentkezhetunk a fiokunkbol. Erre a gombra kattintva visszakerulunk a fooldalra.
+A "Regisztráció" menüpontra kattintva értelemszerűen eljutunk a regisztrációs oldalra, ahol a mezők kitöltése után a "Regisztrálok!" gombra kattintva máris bekerül a vendég a rendszerbe, mint felhasználó fiókkal. A vezetéknév illetve keresztnév mezők kivételével minden mező kitöltése kötelező. A jelszónak minimum 5 karakternek kell lennie. Miután regisztráltunk, a "Bejelentkezés" gombra kattintva értelemszerűen bejelentkezhetünk. A gombra kattintva a bejelentkező oldalra jutunk, ahol az e-mail cím és a hozzátartozó jelszó megadásával tudunk bejelentkezni. Ha valami hiba lép fel a bejelentkezés során, akkor arról hibaüzenetet kapunk. Miután bejelentkezünk, újra a főoldalra kerülünk, ahol a jobb felső sarokban a nevünkre kattintva egy legördülő menü menüpontjai közül választhatunk. Az első menüpont a "Saját receptjeim", ahol megtekinthetjük az általunk beküldött recepteket egy listában, a receptek nevei mellett a recept kategóriájának nevével. Ha ki szeretnénk törölni egy saját receptet, akkor egyszerűen csak kattintsunk a receptre, majd a recept oldalán a "Recept törlése" gombra. Ez a gomb kizárólag annak a felhasználónak jelenik meg, akié az a recept. A legördülő menüben a második menüpont a "Kedvenceim", ahol megtekinthetjük a kedvenc receptjeink listáját. Ha törölni szeretnénk egy receptet a kedvenceink közül, akkor egyszerűen a receptre való kattintás után, a recept oldalán kattintsunk a "Törlöm a kedvencekből" gombra. A harmadik menüpont a "Fiók megtekintése", amire kattintva megtekinthetjük a fiókunk adatait (felhasználónev, vezetéknév, keresztnév, illetve e-mail). Ezek a mezők ezen az oldalon nem szerkeszthetőek. Ha szerkeszteni szeretnénk az adatainkat, akkor azt az "Adataim szerkésztése" gombra kattintva tehetjük meg. Itt minden mező szerkeszthető, beleértve a jelszót is. Miután szerkesztettük a kívánt mezőket, kattintsunk a "Változtatások mentése" gombra és frissül is minden változtatott adat. Ha esetleg olyan felhasználónevet vagy e-mailt választunk, amit már más választott, akkor hibaüzenetet kapunk, mert ezek az adatok minden felhasználóra nézve egyediek. Az utolsó menüpont a "Kijelentkezés", ahol értelemszerűen kijelentkezhetünk a fiókunkból. Erre a gombra kattintva visszakerülünk a főoldalra.
