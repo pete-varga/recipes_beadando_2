@@ -35,7 +35,7 @@ Alkalmazások fejlesztése 2/3 beadandó
 * felhasználó: receptek létrehozását, keresését, böngészését, megtekintését, saját receptjeinek módositását (szerkesztése, törlése), receptek kedvencekhez való felvételét és kedvencekből való törlését, más felhasználók által beküldött receptek hozzávalóinak, illetve leírásainak angolra fordítását végezheti
 
 ## Használati eset diagram (Use Case Diagram)
-![Használati eset diagram](images/UCD.png)
+![Használati eset diagram](images/UCD.PNG)
 Link: [http://bit.ly/2g86BXh](http://bit.ly/2g86BXh)
 
 ## Folyamat diagramok
