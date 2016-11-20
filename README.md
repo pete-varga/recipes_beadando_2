@@ -210,7 +210,17 @@ Windows 7 vagy újabb operációs rendszer, Visual Studio Code v1.5.3, NodeJS v6
 1. Projekt letöltése a számítógépre:
 	A GitHub repository oldalán kattintsunk a "Clone or download" gombra, majd válasszuk ki a "Download ZIP" opciót. Ezután csomagoljuk ki egy kívánt helyre a letöltött fájlt.
 2. Program elindítása:
-	Nyissuk meg a Visual Studio Code-ot és kattintsunk a File > Open Folder menüpontra és válasszuk ki a mappát, amibe az első lépésben kicsomagoltuk a projektet. Ezután nyissuk meg a Visual Studio Code-on belül a Terminal-t (View > Integrated Termianal). A honlap elindításához irjuk be a parancssorba, hogy ```npm run dev``` és a ```localhost:3333``` címen máris elérhető a honlap. Ha az adatbázisban szeretnénk manuálisan szerkeszteni valamit, amit a honlapon nem lehet (például új kategória felvétele), nyissunk meg egy új Terminal-t a + gombra kattintva a jelenlegi Terminal ablakon belül és írjuk be a parancssorba, hogy ```node_modules\.bin\admin config\express-admin``` és a ```localhost:4444``` címen elérhető lesz az adatbázis. Az adatbázisba való bejelentkezéshez szükséges adatok: ```Username: admin, Password: ADmin11```
+	Nyissuk meg a Visual Studio Code-ot és kattintsunk a File > Open Folder menüpontra és válasszuk ki a mappát, amibe az első lépésben kicsomagoltuk a projektet. Ezután nyissuk meg a Visual Studio Code-on belül a Terminal-t (View > Integrated Termianal). 
+
+	Az alábbi sorrendben írjuk be a parancsokat a parancssorba és várjunk, míg lefutnak.
+
+	```npm install```
+
+	```npm update```
+
+	```npm install express-admin```
+	
+	A honlap elindításához írjuk be a parancssorba, hogy ```npm run dev``` és a ```localhost:3333``` címen máris elérhető a honlap. Ha az adatbázisban szeretnénk manuálisan szerkeszteni valamit, amit a honlapon nem lehet (például új kategória felvétele), nyissunk meg egy új Terminal-t a + gombra kattintva a jelenlegi Terminal ablakon belül és írjuk be a parancssorba, hogy ```node_modules\.bin\admin config\express-admin``` és a ```localhost:4444``` címen elérhető lesz az adatbázis. Az adatbázisba való bejelentkezéshez szükséges adatok: ```Username: admin, Password: ADmin11```
 
 A fentebb említett instrukciók során feltételezzük, hogy az npmJS, nodeJS (és AdonisJS) legfrissebb verziói telepítve vannak.
 
