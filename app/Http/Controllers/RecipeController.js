@@ -9,13 +9,15 @@ const Database = use('Database');
 class RecipeController {
     * list(req, res){ //*: async fuggveny, yield async fuggvenyek ele kell
         var categories = yield Category.with('recipes').fetch(); //recipes = ugyanaz, mint categoryba recipes()
+        var title = "Receptkönyv";
         
         yield res.sendView('main', {
             categories: categories.toJSON()
-        });
+        ,title});
     }
 
     * latestRecipes(req, res){
+        var title = "Főoldal - Receptkönyv";
         var recipeNames = yield Database.table('recipes').orderBy('created_at', 'desc').pluck('name') //csokkeno sorrendben a letrehozast illetoen, es csak a recept nevet adja vissza
         var recipeIds = yield Database.table('recipes').orderBy('created_at', 'desc').pluck('id')
         var recipeCategoryIds = yield Database.table('recipes').orderBy('created_at', 'desc').pluck('category_id')
@@ -46,24 +48,26 @@ class RecipeController {
         }
         
 
-        yield res.sendView('latestrecipes', {latest}); //hasznalni lehessen a latest array-t
+        yield res.sendView('latestrecipes', {latest,title}); //hasznalni lehessen a latest array-t
     }
 
     * create(req, res){
+        var title = "Új recept felvétele - Receptkönyv";
         try{
             var userID = req.currentUser.id;
             var categories = yield Category.all();
 
             yield res.sendView('create', {
                 categories: categories.toJSON()
-            });
+            ,title});
             res.redirect('/')
         }catch(e){
+            title = "Receptkönyv"
             yield req
             .withAll()
             .andWith({ errors: [{
                 message: "Csak bejelentkezett felhasználók hozhatnak létre új receptet!"
-            }] })
+            }] ,title})
             .flash()
 
             res.redirect('/error')
@@ -81,28 +85,31 @@ class RecipeController {
             category_id: post.category_id
         };
 
-        const validation = yield Validator.validateAll(userData, Recipe.rules)
-
-        if (validation.fails()) {
+        if(post.name=="" || post.description==""){
             yield req
                 .withAll()
-                .andWith({ errors: validation.messages() })
+                .andWith({ errors: [{ 
+                    message: "Nem töltötte ki a név vagy leirás mezőt!"
+                }],
+                    title: "Új recept felvétele - Receptkönyv"
+                })
                 .flash()
 
             res.redirect('back')
             return
+        }else{
+            userData.user_id = req.currentUser.id
+            
+            var recipe = yield Recipe.create(userData);
+            yield recipe.save();
+            res.redirect('/recipe/'+recipe.id);
         }
-
-        userData.user_id = req.currentUser.id
-        
-        var recipe = yield Recipe.create(userData);
-        yield recipe.save();
-        res.redirect('/recipe/'+recipe.id);
     }
 
     * show(req, res){
         const isLoggedIn = yield req.auth.check()
         var recipe = yield Recipe.findBy('id', req.param('id'));
+        var title = "Recept: " + recipe.name + " - Receptkönyv";
         yield recipe.related('category').load();
 
         if(isLoggedIn){
@@ -111,16 +118,17 @@ class RecipeController {
             yield res.sendView('show', {
                 recipe: recipe.toJSON(),
                 favorites: favorites.toJSON()
-            });
+            ,title});
         }else{
             yield res.sendView('show', {
                 recipe: recipe.toJSON()
-            });
+            ,title});
         }
     }
 
     * edit(req, res){
         var recipe = yield Recipe.findBy('id', req.param('id'));
+        var title = recipe.name + " recept szerkesztése - Receptkönyv";
         var categories = yield Category.all();
 
         const isLoggedIn = yield req.auth.check()
@@ -129,7 +137,9 @@ class RecipeController {
             .withAll()
             .andWith({ errors: [{
                 message: "Csak bejelentkezett felhasználók szerkeszthetnek receptet!"
-            }] })
+            }],
+                title: "Receptkönyv"
+            })
             .flash()
 
             res.redirect('/error')
@@ -140,7 +150,9 @@ class RecipeController {
             .withAll()
             .andWith({ errors: [{
                 message: "Ezt a receptet nem te küldted be!"
-            }] })
+            }],
+                title: "Receptkönyv"
+            })
             .flash()
 
             res.redirect('/error')
@@ -150,7 +162,7 @@ class RecipeController {
         yield res.sendView('edit', {
             recipe: recipe.toJSON(),
             categories: categories.toJSON()
-        });
+        ,title});
     }
 
     * editSubmit(req, res){
@@ -171,7 +183,7 @@ class RecipeController {
         if (validation.fails()) {
             yield req
                 .withAll()
-                .andWith({ errors: validation.messages() })
+                .andWith({ errors: validation.messages() , title: recipe.name + " recept szerkesztése" })
                 .flash()
 
             res.redirect('back')
@@ -192,6 +204,7 @@ class RecipeController {
     * delete(req, res){
         var recipe = yield Recipe.findBy('id', req.param('id'));
         var message = "A recept sikeresen törölve lett!";
+        var title = "Receptkönyv";
 
         try{
             var fav = yield Database.table('favorites');
@@ -213,12 +226,12 @@ class RecipeController {
         yield recipe.delete();*/
 
         //res.redirect('/');
-        yield res.sendView('success', {message});
+        yield res.sendView('success', {message,title});
     }
 
     * translate(req, res){
         var recipe = yield Recipe.findBy('id', req.param('id'));
-        
+        var title = recipe.name + " recept forditása";
 
         const isLoggedIn = yield req.auth.check()
         if (!isLoggedIn) {
@@ -226,7 +239,9 @@ class RecipeController {
             .withAll()
             .andWith({ errors: [{
                 message: "Csak bejelentkezett felhasználók fordíthatnak le receptet!"
-            }] })
+            }],
+                title: "Receptkönyv"
+            })
             .flash()
 
             res.redirect('/error')
@@ -234,13 +249,12 @@ class RecipeController {
 
         yield res.sendView('translate', {
             recipe: recipe.toJSON()
-        });
-
+        ,title});
 
         if (validation.fails()) {
             yield req
                 .withAll()
-                .andWith({ errors: validation.messages() })
+                .andWith({ errors: validation.messages() , title: recipe.name + " recept forditása" })
                 .flash()
 
             res.redirect('back')
@@ -263,7 +277,7 @@ class RecipeController {
     * search(req, res){
         var query = req.input('q') || '';
         var page = req.input('page') || 1;
-
+        var title = "Keresés eredménye - Receptkönyv";
 
         var recipes = yield Recipe.query()
             .where(function(){
@@ -272,17 +286,18 @@ class RecipeController {
                 }
             })
             .with('category')
-            .paginate(page, 2)
+            .paginate(page, 5)
 
             //console.log(recipes.toJSON())
 
         yield res.sendView('search', {
             recipes: recipes.toJSON()
-        });
+        ,title});
     }
 
     * error(req, res){
-        yield res.sendView('error');
+        var title = "Receptkönyv";
+        yield res.sendView('error',{title});
     }
 }
 

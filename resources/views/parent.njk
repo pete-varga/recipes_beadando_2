@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Receptkönyv</title>
+    <title>{{ title }}</title>
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +32,7 @@
                 <form class="navbar-form navbar-left" role="search" action="/search" method="POST">
                     {{ csrfField }}
                     <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q"/>
+                    <input type="text" class="form-control" placeholder="Keresés" name="q"/>
                     </div>
                     <button type="submit" class="btn btn-default">Keresés</button>
                 </form>

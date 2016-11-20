@@ -6,6 +6,8 @@
       <div class="panel-heading">{{ recipe.name }}</div>
         <div class="panel-body">
           {{ recipe.description }}
+          <p>&nbsp;</p>
+          <p><span class="btn btn-link"><a href="/recipe/{{ recipe. id}}">Teljes recept megtekintése</a></span></p>
         </div>
       <div class="panel-footer"><span class="label label-info">{{ recipe.category.name }}</span></div>
     </div>

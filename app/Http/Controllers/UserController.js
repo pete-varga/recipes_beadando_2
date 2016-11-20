@@ -8,7 +8,8 @@ const Hash = use('Hash');
 
 class UserController {
     * login(req, res){
-        yield res.sendView('login');
+        var title = "Bejelentkezés - Receptkönyv";
+        yield res.sendView('login',{title});
     }
 
     * loginSubmit(req, res){
@@ -21,7 +22,9 @@ class UserController {
                 .withOut('password')
                 .andWith({ errors: [{
                     message: "Az e-mail vagy jelszó helytelen!"
-                }] })
+                }],
+                    title: "Bejelentkezés - Receptkönyv"
+                })
                 .flash()
 
             res.redirect('back')
@@ -34,7 +37,8 @@ class UserController {
     }
 
     * register(req, res){
-        yield res.sendView('register');
+        var title = "Regisztráció - Receptkönyv";
+        yield res.sendView('register',{title});
     }
 
     * registerSubmit(req, res){
@@ -54,7 +58,7 @@ class UserController {
         if (validation.fails()) {
             yield req
                 .withOut('password','password2')
-                .andWith({ errors: validation.messages() })
+                .andWith({ errors: validation.messages() , title: "Regisztráció - Receptkönyv"})
                 .flash()
 
             res.redirect('back')
@@ -73,26 +77,29 @@ class UserController {
     }
 
     * myrecipes(req, res){
+        var title = "Saját receptjeim - Receptkönyv";
         var recipes = yield Recipe.query().where('user_id', req.currentUser.id).with('category').fetch()
         //console.log(categories);
 
         yield res.sendView('myrecipes', {
             recipes: recipes.toJSON()
-        });
+        ,title});
     }
 
     * myfavorites(req, res){
+        var title = "Kedvenc recepjteim - Receptkönyv";
         var favorites = yield Favorite.query().where('user_id', req.currentUser.id).with('recipe').fetch()
 
         yield res.sendView('myfavorites',{
             favorites: favorites.toJSON()
-        });
+        ,title});
     }
 
     * favoriteSubmit(req, res){
         var recipe = yield Recipe.findBy('id', req.param('id'));
         var user = req.currentUser.id;
         var message = "A recept sikeresen hozzá lett adva a kedvencekhez!";
+        var title = "Receptkönyv";
         var favAdded = true;
 
         var userData = {
@@ -103,10 +110,11 @@ class UserController {
         var favorite = yield Favorite.create(userData);
         yield favorite.save();
 
-        yield res.sendView('success',{message,recipe,favAdded});
+        yield res.sendView('success',{message,recipe,favAdded,title});
     }
 
     * favoriteDelete(req, res){
+        var title = "Receptkönyv";
         var recipe = yield Recipe.findBy('id', req.param('id'));
         var favorite = yield Favorite.findBy('recipe_id', recipe.id);
         var message = "A recept sikeresen törölve lett a kedvencek közül!";
@@ -114,39 +122,45 @@ class UserController {
 
         yield favorite.delete();
 
-        yield res.sendView('success',{message,recipe,favDeleted});
+        yield res.sendView('success',{message,recipe,favDeleted,title});
     }
 
     * account(req, res){
+        var title = "Fiókom - Receptkönyv";
         const isLoggedIn = yield req.auth.check()
         if (!isLoggedIn) {
             yield req
             .withAll()
             .andWith({ errors: [{
                 message: "Csak bejelentkezett felhasználók tekinthetik meg a fiókjukat!"
-            }] })
+            }], 
+                title: "Receptkönyv"
+            })
             .flash()
 
             res.redirect('/error')
         }
 
-        yield res.sendView('account');
+        yield res.sendView('account',{title});
     }
 
     * editAccount(req, res){
+        var title = "Fiókadatok szerkesztése - Receptkönyv";
         const isLoggedIn = yield req.auth.check()
         if (!isLoggedIn) {
             yield req
             .withAll()
             .andWith({ errors: [{
                 message: "Csak bejelentkezett felhasználók szerkeszthetik fiókjuk adatait!"
-            }] })
+            }],
+                title: "Receptkönyv"
+            })
             .flash()
 
             res.redirect('/error')
         }
 
-        yield res.sendView('editaccount');
+        yield res.sendView('editaccount',{title});
     }
 
     * accountSubmit(req, res){
@@ -170,7 +184,7 @@ class UserController {
             if (validation.fails()) {
                 yield req
                     .withOut('password','password2')
-                    .andWith({ errors: validation.messages() })
+                    .andWith({ errors: validation.messages() , title: "Fiókadatok szerkesztése - Receptkönyv"})
                     .flash()
 
                 res.redirect('back')
@@ -198,14 +212,18 @@ class UserController {
                 .withAll()
                 .andWith({ errors: [{
                     message: "Ezzel az e-maillel már létezik felhasználó!"
-                }] })
+                }],
+                    title: "Fiókadatok szerkesztése - Receptkönyv"
+                })
                 .flash()
             }else if(str.indexOf(usernamemsg) != -1){
                 yield req
                 .withAll()
                 .andWith({ errors: [{
                     message: "Ezzel a felhasználónévvel már létezik felhasználó!"
-                }] })
+                }],
+                    title: "Fiókadatok szerkesztése - Receptkönyv"
+                })
                 .flash()
             }
             

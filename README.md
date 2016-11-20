@@ -41,13 +41,14 @@ Link: [http://bit.ly/2g86BXh](http://bit.ly/2g86BXh)
 ## Folyamat diagramok
 ### Regisztracio
 ![Regisztracio folyamata](images/folyamatok/5.PNG)
+
 Link: [http://bit.ly/2fes81j](http://bit.ly/2fes81j)
 
 ### Bejelentkezés folyamata
 ![Bejelentkezés folyamata](images/folyamatok/1.PNG)
 Link: [http://bit.ly/2djnJWt](http://bit.ly/2djnJWt)
 
-### Fiokadatok szerkesztese
+### Fiókadatok szerkesztése
 ![Fiokadatok szerkesztesenek folyamata](images/folyamatok/6.PNG)
 Link: [http://bit.ly/2g8gg03](http://bit.ly/2g8gg03)
 
@@ -213,6 +214,6 @@ Az "Új recept felvétele" menüpontra kattintva két opció lehetséges: a) a f
 
 A "Receptek böngészése" menüpontra kattintva láthatjuk az összes receptet kategóriákra bontva. Bármely receptre kattintva megtekinthetjük magát a receptet. A recept oldalának alján, ha egy felhasználó be van jelentkezve, akkor több gombot is láthat. Az első gomb a "Kedvencekhez adom", aminek segítségével a kedvenceinkhez adhatjuk a receptet. Ha már a kedvenceink közt van a recept, akkor ez a gomb "Törlöm a kedvencekből" felirattal jelenik meg, aminek használatát lejjebb részletésen kifejtve találhatja meg. A második gomb a "Recept szerkésztése" gomb, amire kattintva a receptszerkesztő oldalra jutunk. Itt ugyanazok érvényesek, mint új recept felvételekor. A harmadik gomb, amit láthatunk egy recept oldalán, a "Recept törlése" gomb, ami kizárólag csak azoknak a felhasználóknak jelenik meg, akié a recept, amit éppen nézünk.
 
-A kerésés mező kitöltésekor a "Kerésés" gombra kattintva a kerésési találatok oldalára jutunk. Ha a kerésési mező nem volt kitöltve, de a gombot megnyomjuk, akkor az összes receptet látjuk. A kerésés során oldalanként [TODO] X db receptet tekinthetünk meg, a lap alján pedig a balra/jobbra-nyilakkal, illetve a számokkal navigálhatunk a találatok között.
+A kerésés mező kitöltésekor a "Kerésés" gombra kattintva a kerésési találatok oldalára jutunk. Ha a kerésési mező nem volt kitöltve, de a gombot megnyomjuk, akkor az összes receptet látjuk. A kerésés során oldalanként 5 db receptet tekinthetünk meg, a lap alján pedig a balra/jobbra-nyilakkal, illetve a számokkal navigálhatunk a találatok között.
 
 A "Regisztráció" menüpontra kattintva értelemszerűen eljutunk a regisztrációs oldalra, ahol a mezők kitöltése után a "Regisztrálok!" gombra kattintva máris bekerül a vendég a rendszerbe, mint felhasználó fiókkal. A vezetéknév illetve keresztnév mezők kivételével minden mező kitöltése kötelező. A jelszónak minimum 5 karakternek kell lennie. Miután regisztráltunk, a "Bejelentkezés" gombra kattintva értelemszerűen bejelentkezhetünk. A gombra kattintva a bejelentkező oldalra jutunk, ahol az e-mail cím és a hozzátartozó jelszó megadásával tudunk bejelentkezni. Ha valami hiba lép fel a bejelentkezés során, akkor arról hibaüzenetet kapunk. Miután bejelentkezünk, újra a főoldalra kerülünk, ahol a jobb felső sarokban a nevünkre kattintva egy legördülő menü menüpontjai közül választhatunk. Az első menüpont a "Saját receptjeim", ahol megtekinthetjük az általunk beküldött recepteket egy listában, a receptek nevei mellett a recept kategóriájának nevével. Ha ki szeretnénk törölni egy saját receptet, akkor egyszerűen csak kattintsunk a receptre, majd a recept oldalán a "Recept törlése" gombra. Ez a gomb kizárólag annak a felhasználónak jelenik meg, akié az a recept. A legördülő menüben a második menüpont a "Kedvenceim", ahol megtekinthetjük a kedvenc receptjeink listáját. Ha törölni szeretnénk egy receptet a kedvenceink közül, akkor egyszerűen a receptre való kattintás után, a recept oldalán kattintsunk a "Törlöm a kedvencekből" gombra. A harmadik menüpont a "Fiók megtekintése", amire kattintva megtekinthetjük a fiókunk adatait (felhasználónev, vezetéknév, keresztnév, illetve e-mail). Ezek a mezők ezen az oldalon nem szerkeszthetőek. Ha szerkeszteni szeretnénk az adatainkat, akkor azt az "Adataim szerkésztése" gombra kattintva tehetjük meg. Itt minden mező szerkeszthető, beleértve a jelszót is. Miután szerkesztettük a kívánt mezőket, kattintsunk a "Változtatások mentése" gombra és frissül is minden változtatott adat. Ha esetleg olyan felhasználónevet vagy e-mailt választunk, amit már más választott, akkor hibaüzenetet kapunk, mert ezek az adatok minden felhasználóra nézve egyediek. Az utolsó menüpont a "Kijelentkezés", ahol értelemszerűen kijelentkezhetünk a fiókunkból. Erre a gombra kattintva visszakerülünk a főoldalra.
