@@ -220,7 +220,9 @@ Windows 7 vagy újabb operációs rendszer, Visual Studio Code v1.5.3, NodeJS v6
 
 	```npm install express-admin```
 	
-	A honlap elindításához írjuk be a parancssorba, hogy ```npm run dev``` és a ```localhost:3333``` címen máris elérhető a honlap. Ha az adatbázisban szeretnénk manuálisan szerkeszteni valamit, amit a honlapon nem lehet (például új kategória felvétele), nyissunk meg egy új Terminal-t a + gombra kattintva a jelenlegi Terminal ablakon belül és írjuk be a parancssorba, hogy ```node_modules\.bin\admin config\express-admin``` és a ```localhost:4444``` címen elérhető lesz az adatbázis. Az adatbázisba való bejelentkezéshez szükséges adatok: ```Username: admin, Password: ADmin11```
+	Ezután a honlap elindításához írjuk be a parancssorba, hogy ```npm run dev``` és a ```localhost:3333``` címen máris elérhető a honlap. Ha az adatbázisban szeretnénk manuálisan szerkeszteni valamit, amit a honlapon nem lehet (például új kategória felvétele), nyissunk meg egy új Terminal-t a + gombra kattintva a jelenlegi Terminal ablakon belül és írjuk be a parancssorba, hogy ```node_modules\.bin\admin config\express-admin``` és a ```localhost:4444``` címen elérhető lesz az adatbázis. Az adatbázisba való bejelentkezéshez szükséges adatok: ```Username: admin, Password: ADmin11```
+
+Példafelhasználó adatai (amivel indítás után egyből be lehet jelentkezni): ```E-mail: p@p.com, Jelszó: jjjjj```
 
 A fentebb említett instrukciók során feltételezzük, hogy az npmJS, nodeJS (és AdonisJS) legfrissebb verziói telepítve vannak.
 
