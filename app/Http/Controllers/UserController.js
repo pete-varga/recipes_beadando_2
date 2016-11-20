@@ -42,38 +42,66 @@ class UserController {
     }
 
     * registerSubmit(req, res){
-        var post = req.post();
+        try{
+            var post = req.post();
 
-        var userData = {
-            username: post.username,
-            firstname: post.firstname,
-            lastname: post.lastname,
-            email: post.email,
-            password: post.password,
-            password2: post.password2
-        };
+            var userData = {
+                username: post.username,
+                firstname: post.firstname,
+                lastname: post.lastname,
+                email: post.email,
+                password: post.password,
+                password2: post.password2
+            };
 
-        const validation = yield Validator.validateAll(userData, User.rules)
+            const validation = yield Validator.validateAll(userData, User.rules)
 
-        if (validation.fails()) {
-            yield req
-                .withOut('password','password2')
-                .andWith({ errors: validation.messages() , title: "Regisztráció - Receptkönyv"})
+            if (validation.fails()) {
+                yield req
+                    .withOut('password','password2')
+                    .andWith({ errors: validation.messages() , title: "Regisztráció - Receptkönyv"})
+                    .flash()
+
+                res.redirect('back')
+                return
+            }
+
+            delete userData.password2;
+            userData.password = yield Hash.make(userData.password);
+
+            var user = yield User.create(userData);
+            yield user.save();
+
+            req.auth.login(user);
+
+            res.redirect('/');
+        }catch(e){
+            var str = String(e);
+            var emailmsg = "users.email";
+            var usernamemsg = "users.username";
+            var passwordmsg = "password";
+            if(str.indexOf(emailmsg) != -1){
+                yield req
+                .withAll()
+                .andWith({ errors: [{
+                    message: "Ezzel az e-maillel már létezik felhasználó!"
+                }],
+                    title: "Regisztráció - Receptkönyv"
+                })
                 .flash()
+            }else if(str.indexOf(usernamemsg) != -1){
+                yield req
+                .withAll()
+                .andWith({ errors: [{
+                    message: "Ezzel a felhasználónévvel már létezik felhasználó!"
+                }],
+                    title: "Regisztráció - Receptkönyv"
+                })
+                .flash()
+            }
 
-            res.redirect('back')
-            return
+            res.redirect('back');
         }
-
-        delete userData.password2;
-        userData.password = yield Hash.make(userData.password);
-
-        var user = yield User.create(userData);
-        yield user.save();
-
-        req.auth.login(user);
-
-        res.redirect('/');
     }
 
     * myrecipes(req, res){
@@ -226,8 +254,7 @@ class UserController {
                 })
                 .flash()
             }
-            
-
+        
             res.redirect('back');
         }
     }

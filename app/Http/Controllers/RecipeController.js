@@ -46,7 +46,6 @@ class RecipeController {
         if(latest.length!=0){
             latest.length = 10; //10 legfrissebb recept
         }
-        
 
         yield res.sendView('latestrecipes', {latest,title}); //hasznalni lehessen a latest array-t
     }
@@ -218,14 +217,7 @@ class RecipeController {
         }catch(e){
             yield recipe.delete();
         }
-
-        /*var recipe = yield Recipe.findBy('id', req.param('id'));
-        var favorite = yield Favorite.findBy('recipe_id', recipe.id);
-
-        yield favorite.delete();
-        yield recipe.delete();*/
-
-        //res.redirect('/');
+        
         yield res.sendView('success', {message,title});
     }
 

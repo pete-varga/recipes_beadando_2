@@ -1,17 +1,14 @@
 {% extends "parent.njk" %}
 
 {% block content %}
+<div class="panel panel-primary">
+  <div class="panel-heading">Keresés eredménye</div>
     {% for recipe in recipes.data %}
-    <div class="panel panel-default">
-      <div class="panel-heading">{{ recipe.name }}</div>
-        <div class="panel-body">
-          {{ recipe.description }}
-          <p>&nbsp;</p>
-          <p><span class="btn btn-link"><a href="/recipe/{{ recipe. id}}">Teljes recept megtekintése</a></span></p>
-        </div>
-      <div class="panel-footer"><span class="label label-info">{{ recipe.category.name }}</span></div>
-    </div>
+      <div class="list-group">
+        <a href="/recipe/{{ recipe.id }}" class="list-group-item">{{ recipe.name }}<span class="label label-info pull-right">{{ recipe.category.name }}</span></a>
+      </div>
     {% endfor %}
+</div>
 
 <center>
   <ul class="pagination pagination-sm">
