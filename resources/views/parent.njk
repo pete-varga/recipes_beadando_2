@@ -9,6 +9,11 @@
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet">
+    <link href="/search.css" rel="stylesheet">
+    <link href="/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/search.js"></script>
+    {% block scripts %}{% endblock %}
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -29,12 +34,13 @@
                 <li><a href="/create">Új recept felvétele</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="search" action="/search" method="POST">
+                <form class="navbar-form navbar-left" role="search" id="search" action="/search" method="POST">
                     {{ csrfField }}
                     <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Keresés" name="q"/>
+                        <input type="text" class="form-control" placeholder="Keresés" name="q"/>
                     </div>
                     <button type="submit" class="btn btn-default">Keresés</button>
+                    <div class="list-group recipe-suggestions suggestions"></div>
                 </form>
                 {% if currentUser %}
                 <li class="dropdown">

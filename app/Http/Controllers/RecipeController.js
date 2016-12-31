@@ -287,6 +287,21 @@ class RecipeController {
         ,title});
     }
 
+    * ajaxSearch(req, res){
+        var query = req.input('q');
+        if(!query){
+            res.ok([]);
+            return;
+        }
+        
+        var recipes = yield Recipe.query()
+            .where(function(){
+                    this.where('name', 'LIKE', '%'+query+'%');
+            });
+
+        res.ok(recipes);
+    }
+
     * error(req, res){
         var title = "Receptkönyv";
         yield res.sendView('error',{title});

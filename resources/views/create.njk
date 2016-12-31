@@ -1,5 +1,74 @@
 {% extends "parent.njk" %}
 
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <script>
+        $(function(){
+        var $hozzavalok=$('#hozzavalok');
+        function ujSor(hozzavalo){
+            var html=`<div class="form-group smart-ingredient">
+                    <div class="col-md-1">
+                        <input class="form-control smart-ingredient-amount" value="${hozzavalo.mennyiseg}" type="text">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control smart-ingredient-name" value="${hozzavalo.hozzavalo}" type="text">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn-block">
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>`;
+            var sor=$(html)
+            sor.on('click','.btn-danger', function (){
+                $(this).closest('.smart-ingredient').remove();
+            });
+            $hozzavalok.append(sor);
+        }
+        $('#add').on('click', function(){
+            ujSor({
+                mennyiseg:'1',
+                hozzavalo:''
+            });
+        });
+        var $description=$('#description');
+        $('#form').on('submit', function(){
+            var str='';
+            $('.smart-ingredient').each(function(){
+            var mennyiseg=$(this).find('.smart-ingredient-amount').val();
+            var hozzavalo=$(this).find('.smart-ingredient-name').val();
+            str+= mennyiseg + ' ' + hozzavalo+'; \n';
+            });  
+            str+='\n';
+            $description.val(str + $description.val());
+            console.log($description.val());
+            console.log(reszek);
+        });
+        var description = $description.val();
+        var reszek = description.split('\n\n');
+        var hozzavalok;
+        if(reszek.length>1){
+            hozzavalok=reszek[0];
+            $description.val(reszek.slice(1).join('\n\n'));
+        }else{
+            hozzavalok='';
+        }
+        var hozzavaloSorok = hozzavalok.split('\n');
+        for(var i=0;i<hozzavaloSorok.length;i++){
+            var sor = hozzavaloSorok[i];
+            if(sor === ''){
+                continue;
+            }
+            var reszek=sor.split(' ');
+            ujSor({
+                mennyiseg:reszek[0],
+                hozzavalo:reszek.slice(1).join(' ')
+            });
+        }
+        });
+        </script>
+{% endblock %}
+
 {% block content %}
 <div class="row">
     {% for error in old('errors') %}
@@ -8,7 +77,7 @@
         <strong>Hiba!</strong> {{ error.message }}
     </div>
     {% endfor %}
-    <form class="form-horizontal" method="POST">
+    <form class="form-horizontal" method="POST" id="form">
         {{ csrfField }}
         <fieldset>
             <legend>Uj recept</legend>
@@ -19,9 +88,20 @@
             </div>
             </div>
             <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Recept hozzavaloi</label>
+            <div class="col-lg-10">
+                <div id="hozzavalok"></div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success btn-block" id="add">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Recept leírása</label>
             <div class="col-lg-10">
-                <textarea name="description" class="form-control" style="width: 30%" rows="7">{{ old('description') }}</textarea>
+                <textarea name="description" id="description" class="form-control" style="width: 30%" rows="7">{{ old('description') }}</textarea>
                 <span class="help-block">Ebbe a dobozba írja be a recept hozzávalóit és elkészítésének leírását.</span>
             </div>
             </div>

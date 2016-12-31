@@ -1,5 +1,22 @@
 {% extends "parent.njk" %}
 
+{% block scripts %}
+<script>
+$(function(){
+    $('.englishDescriptionBox').hide();
+    $('.showEnglish').on('click',function(e){
+      e.preventDefault();
+      //$(this).html('Hide the English version');
+      $('.englishDescriptionBox').fadeToggle();
+    });
+
+    var str = document.getElementById("recipeDesc").innerHTML;
+    var res = str.replace(/;/g, "<br><br>");
+    document.getElementById("recipeDesc").innerHTML = res;
+});
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="row">
     {% for error in old('errors') %}
@@ -10,7 +27,7 @@
     {% endfor %}
     <div class="panel panel-default">
       <div class="panel-heading"><h4>{{ recipe.name }}</h4></div>
-        <div class="panel-body">
+        <div class="panel-body" id="recipeDesc">
           {{ recipe.description }}
         </div>
       <div class="panel-footer">
@@ -22,6 +39,8 @@
       </div>
     </div>
     {% if (recipe.englishDescription!="") %}
+    <p><a href="#" class="btn btn-info showEnglish">Show/hide the english version</a></p>
+    <div class="englishDescriptionBox">
         <p class="lead">English version:</h4>
           <div class="panel panel-default">
             <div class="panel-heading"><h4>{{ recipe.englishName }}</h4></div>
@@ -31,7 +50,8 @@
             </div>
         {% else %}
         <p class="text-muted" style="padding-left: 15px;">Ennek a receptnek még nincsen angol verziója! <a href="/recipe/{{ recipe.id }}/translate" class="btn btn-link">Lefordítom!</a></p>
-        {% endif %}
+    </div>
+    {% endif %}
     {% if (currentUser.id!=null) %}
     {% set isFavorite = "no" %}
       {% for favorite in favorites %}
