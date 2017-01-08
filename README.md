@@ -273,7 +273,7 @@ A "Regisztráció" menüpontra kattintva értelemszerűen eljutunk a regisztrác
 
 A Selenium IDE segítségével az alábbi eseteket teszteltük:
 
-:white_check_mark: Bejelentkezés: a főoldalt meglátogatva nincsen éppen bejelentkezett felhasználó, igy a "Bejelentkezés" linkre kattintva a felugró ablakba beirjuk az adatainkat és megnyomjuk a bejelentkezéshez használt gombot.
+:white_check_mark: Bejelentkezés: a főoldalt meglátogatva nincsen éppen bejelentkezett felhasználó, igy a "Bejelentkezés" linkre kattintva a felugró ablakba beirjuk az adatainkat és megnyomjuk a bejelentkezéshez használt gombot. Előfordulhat, hogy a Selenium nem találja a "login-link" ID-jű vagy "inputUsername" ID-jű elementeket, annak ellenére, hogy szerepel az oldalon. Ekkor manuálisan jelentkezzünk be "p@p.com" e-mail címmel és "jjjjj" jelszóval és folytassuk a Test Suite futtatását.
 
 :white_check_mark: Fiókadatok szerkesztése: Rákattintunk a menüsávban a nevünkre, a legördülő menüben az "Adataim" menüpontra, majd az "Adataim szerkesztése" gombra. A megjelenő oldalon kitöltjük a mezőket a megfelelől adatokkal (lsd. Selenium) majd rákattintunk a "Mentés" gombra.
 
