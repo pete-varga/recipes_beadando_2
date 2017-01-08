@@ -1,18 +1,26 @@
 {% extends "parent.njk" %}
 
 {% block scripts %}
+<script src="/delete.js"></script>
 <script>
 $(function(){
     $('.englishDescriptionBox').hide();
+    $('.englishTitle').hide();
+    $('.englishPanel').hide();
     $('.showEnglish').on('click',function(e){
       e.preventDefault();
       //$(this).html('Hide the English version');
       $('.englishDescriptionBox').fadeToggle();
+      $('.englishTitle').fadeToggle();
+      $('.englishPanel').fadeToggle();
     });
 
     var str = document.getElementById("recipeDesc").innerHTML;
     var res = str.replace(/;/g, "<br><br>");
     document.getElementById("recipeDesc").innerHTML = res;
+    var strE = document.getElementById("recipeEnglishDesc").innerHTML;
+    var resE = strE.replace(/;/g, "<br><br>");
+    document.getElementById("recipeEnglishDesc").innerHTML = resE;
 });
 </script>
 {% endblock %}
@@ -40,17 +48,15 @@ $(function(){
     </div>
     {% if (recipe.englishDescription!="") %}
     <p><a href="#" class="btn btn-info showEnglish">Show/hide the english version</a></p>
-    <div class="englishDescriptionBox">
-        <p class="lead">English version:</h4>
-          <div class="panel panel-default">
-            <div class="panel-heading"><h4>{{ recipe.englishName }}</h4></div>
-              <div class="panel-body">
-                {{ recipe.englishDescription }}
-              </div>
-            </div>
-        {% else %}
-        <p class="text-muted" style="padding-left: 15px;">Ennek a receptnek még nincsen angol verziója! <a href="/recipe/{{ recipe.id }}/translate" class="btn btn-link">Lefordítom!</a></p>
-    </div>
+    <p class="lead englishTitle">English version:</p>
+      <div class="panel panel-default englishPanel">
+        <div class="panel-heading"><h4>{{ recipe.englishName }}</h4></div>
+          <div class="panel-body" id="recipeEnglishDesc">
+            {{ recipe.englishDescription }}
+          </div>
+      </div>
+    {% else %}
+    <p class="text-muted" style="padding-left: 15px;">Ennek a receptnek még nincsen angol verziója! <a href="/recipe/{{ recipe.id }}/translate" class="btn btn-link">Lefordítom!</a></p>
     {% endif %}
     {% if (currentUser.id!=null) %}
     {% set isFavorite = "no" %}
@@ -72,11 +78,25 @@ $(function(){
     {% endif %}
     {% if (currentUser.id==recipe.user_id) %}
     <a href="/recipe/{{ recipe.id }}/edit" class="btn btn-primary pull-left" style="margin-right: 10px;">Recept szerkesztése</a>
-    <form action="/recipe/{{ recipe.id }}/delete" method="POST">
+    <form id="torol" action="/recipe/{{ recipe.id }}/delete" method="POST">
         {{ csrfField}}
-        <input type="submit" class="btn btn-danger" value="Recept törlése">
+        <input type="submit" class="btn btn-danger" value="Recept törlése" id="deleteButton">
     </form>
     {% endif %}
+</div>
+
+<div class="modal fade confirm-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            <p class="lead" style="margin: 0px !important;">Biztosan törölni szeretnéd a receptet?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success modal-ok" data-dismiss="modal">Igen</button>
+            <button type="button" class="btn btn-danger modal-cancel" data-dismiss="modal">Nem</button>
+        </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

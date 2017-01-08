@@ -46,4 +46,6 @@ Route.post('/recipe/:id/removeFavorite','UserController.favoriteDelete');
 Route.get('/error','RecipeController.error');
 Route.group('ajax', function () {
     Route.get('/search', 'RecipeController.ajaxSearch')
+    Route.post('/login', 'UserController.ajaxLogin')
+    Route.delete('/recipe/:id/delete', 'RecipeController.ajaxDelete')
 }).prefix('/ajax')

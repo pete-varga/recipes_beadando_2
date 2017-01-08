@@ -2,70 +2,140 @@
 
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <!-- magyar hozzavalok -->
     <script>
         $(function(){
-        var $hozzavalok=$('#hozzavalok');
-        function ujSor(hozzavalo){
-            var html=`<div class="form-group smart-ingredient">
-                    <div class="col-md-1">
-                        <input class="form-control smart-ingredient-amount" value="${hozzavalo.mennyiseg}" type="text">
-                    </div>
-                    <div class="col-md-3">
-                        <input class="form-control smart-ingredient-name" value="${hozzavalo.hozzavalo}" type="text">
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-danger btn-block">
-                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-                        </button>
-                    </div>
-                </div>`;
-            var sor=$(html)
-            sor.on('click','.btn-danger', function (){
-                $(this).closest('.smart-ingredient').remove();
-            });
-            $hozzavalok.append(sor);
-        }
-        $('#add').on('click', function(){
-            ujSor({
-                mennyiseg:'1',
-                hozzavalo:''
-            });
-        });
-        var $description=$('#description');
-        $('#form').on('submit', function(){
-            var str='';
-            $('.smart-ingredient').each(function(){
-            var mennyiseg=$(this).find('.smart-ingredient-amount').val();
-            var hozzavalo=$(this).find('.smart-ingredient-name').val();
-            str+= mennyiseg + ' ' + hozzavalo+'; \n';
-            });  
-            str+='\n';
-            $description.val(str + $description.val());
-            console.log($description.val());
-            console.log(reszek);
-        });
-        var description = $description.val();
-        var reszek = description.split('\n\n');
-        var hozzavalok;
-        if(reszek.length>1){
-            hozzavalok=reszek[0];
-            $description.val(reszek.slice(1).join('\n\n'));
-        }else{
-            hozzavalok='';
-        }
-        var hozzavaloSorok = hozzavalok.split('\n');
-        for(var i=0;i<hozzavaloSorok.length;i++){
-            var sor = hozzavaloSorok[i];
-            if(sor === ''){
-                continue;
+            var $hozzavalok=$('#hozzavalok');
+            function ujSor(hozzavalo){
+                var html=`<div class="form-group smart-ingredient">
+                        <div class="col-md-1">
+                            <input class="form-control smart-ingredient-amount" value="${hozzavalo.mennyiseg}" type="text">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control smart-ingredient-name" value="${hozzavalo.hozzavalo}" type="text">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger btn-block">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>`;
+                var sor=$(html)
+                sor.on('click','.btn-danger', function (){
+                    $(this).closest('.smart-ingredient').remove();
+                });
+                $hozzavalok.append(sor);
             }
-            var reszek=sor.split(' ');
-            ujSor({
-                mennyiseg:reszek[0],
-                hozzavalo:reszek.slice(1).join(' ')
+            $('#add').on('click', function(){
+                ujSor({
+                    mennyiseg:'1',
+                    hozzavalo:''
+                });
             });
-        }
+            var $description=$('#description');
+            var $englishDesc=$('#englishDescription');
+            $('#form').on('submit', function(){
+                var str='';
+                $('.smart-ingredient').each(function(){
+                var mennyiseg=$(this).find('.smart-ingredient-amount').val();
+                var hozzavalo=$(this).find('.smart-ingredient-name').val();
+                str+= mennyiseg + ' ' + hozzavalo+'; \n';
+                });  
+                str+='\n';
+                $description.val(str + $description.val());
+                /* english amount/ingr */
+                var str2='';
+                $('.smart-ingredient-english').each(function(){
+                    var amount=$(this).find('.smart-ingredient-english-amount').val();
+                    var element=$(this).find('.smart-ingredient-english-name').val();
+                    str2+= amount + ' ' + element +'; \n';
+                });
+                str2+='\n';
+                $englishDesc.val(str2 + $englishDesc.val());
+                /* end of english amount/ingr */
+                /*console.log($englishDesc.val());
+                console.log(parts);
+                console.log('\n\n');
+                console.log($description.val());
+                console.log(reszek);*/
+            });
+            var description = $description.val();
+            var reszek = description.split('\n\n');
+            var hozzavalok;
+            if(reszek.length>1){
+                hozzavalok=reszek[0];
+                $description.val(reszek.slice(1).join('\n\n'));
+            }else{
+                hozzavalok='';
+            }
+            var hozzavaloSorok = hozzavalok.split('\n');
+            for(var i=0;i<hozzavaloSorok.length;i++){
+                var sor = hozzavaloSorok[i];
+                if(sor === ''){
+                    continue;
+                }
+                var reszek=sor.split(' ');
+                ujSor({
+                    mennyiseg:reszek[0],
+                    hozzavalo:reszek.slice(1).join(' ')
+                });
+            }
+            /* english ingredients */
+            var englishDesc = $englishDesc.val();
+            var parts = englishDesc.split('\n\n');
+            var ingredients;
+            if(parts.length>1){
+                ingredients=parts[0];
+                $englishDesc.val(parts.slice(1).join('\n\n'));
+            }else{
+                ingredients='';
+            }
+            var ingredientLines = ingredients.split('\n');
+            for(var i=0;i<ingredientLines.length;i++){
+                var line = ingredientLines[i];
+                if(line === ''){
+                    continue;
+                }
+                var parts=line.split(' ');
+                newLine({
+                    amount:parts[0],
+                    element:parts.slice(1).join(' ')
+                });
+            }
+            /* end of english ingredients */
         });
+        </script>
+        <!-- angol hozzavalok -->
+        <script>
+            $(function(){
+                var $ingr=$('#ingr');
+                function newLine(ingredient){
+                    var html=`<div class="form-group smart-ingredient-english">
+                            <div class="col-md-1">
+                                <input class="form-control smart-ingredient-english-amount" value="${ingredient.amount}" type="text">
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control smart-ingredient-english-name" value="${ingredient.element}" type="text">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger english-danger btn-block">
+                                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>`;
+                    var line=$(html)
+                    line.on('click','.english-danger', function (){
+                        $(this).closest('.smart-ingredient-english').remove();
+                    });
+                    $ingr.append(line);
+                }
+                $('#addNew').on('click', function(){
+                    newLine({
+                        amount:'1',
+                        element:''
+                    });
+                });
+            });
         </script>
 {% endblock %}
 
@@ -105,6 +175,7 @@
                 <span class="help-block">Ebbe a dobozba írja be a recept hozzávalóit és elkészítésének leírását.</span>
             </div>
             </div>
+            <hr>
             <div class="form-group">
             <label for="englishName" class="col-lg-2 control-label">Recept angol neve</label>
             <div class="col-lg-10">
@@ -112,9 +183,20 @@
             </div>
             </div>
             <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Recept angol hozzavaloi</label>
+            <div class="col-lg-10">
+                <div id="ingr"></div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success btn-block" id="addNew">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Recept angol leírása</label>
             <div class="col-lg-10">
-                <textarea name="englishDescription" class="form-control" style="width: 30%" rows="7" placeholder="Hagyja üresen, ha nem kívánja lefordítani angolra a receptet.">{{ old('englishDescription') }}</textarea>
+                <textarea name="englishDescription" id="englishDescription" class="form-control" style="width: 30%" rows="7" placeholder="Hagyja üresen, ha nem kívánja lefordítani angolra a receptet.">{{ old('englishDescription') }}</textarea>
                 <span class="help-block">Ebbe a dobozba írja be a recept hozzávalóit és elkészítésének angol leírását.</span>
             </div>
             </div>

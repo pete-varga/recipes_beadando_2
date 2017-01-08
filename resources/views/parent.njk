@@ -13,6 +13,7 @@
     <link href="/custom.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/search.js"></script>
+    <script src="/login.js"></script>
     {% block scripts %}{% endblock %}
   </head>
   <body>
@@ -44,18 +45,18 @@
                 </form>
                 {% if currentUser %}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ currentUser.firstname }} {{ currentUser.lastname }}<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">{{ currentUser.firstname }} {{ currentUser.lastname }}<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="/myrecipes">Saját recepjteim</a></li>
-                        <li><a href="/myfavorites">Kedvenceim</a></li>
+                        <li><a href="/myrecipes" id="myrecipes">Saját recepjteim</a></li>
+                        <li><a href="/myfavorites" id="myfavorites">Kedvenceim</a></li>
                         <li class="divider"></li>
-                        <li><a href="/account">Fiók megtekintése</a></li>
-                        <li><a href="/logout">Kijelentkezés</a></li>
+                        <li><a href="/account" id="myaccount">Fiók megtekintése</a></li>
+                        <li><a href="/logout" id="logout">Kijelentkezés</a></li>
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="/login">Bejelentkezés</a></li>
-                <li><a href="/register">Regisztráció</a></li>
+                <li><a href="/login" id="login-link">Bejelentkezés</a></li>
+                <li><a href="/register" id="register">Regisztráció</a></li>
                 {% endif %}
             </ul>
             </div>

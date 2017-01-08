@@ -221,6 +221,16 @@ class RecipeController {
         yield res.sendView('success', {message,title});
     }
 
+    * ajaxDelete(req, res){
+        var recipe = yield Recipe.findBy('id', req.param('id')); //eredeti recept adatainak lekerese
+
+        yield recipe.delete();
+
+        yield res.ok({
+            message: "A recept sikeresen törölve lett!"
+        });
+    }
+
     * translate(req, res){
         var recipe = yield Recipe.findBy('id', req.param('id'));
         var title = recipe.name + " recept forditása";
